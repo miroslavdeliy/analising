@@ -1,34 +1,34 @@
 #Функция ввода и модификации строки
+import string
+
+
 def enter_text():
     words = input("Введите любой текст: ")
-    signs = [',', '.', ':', ';', '!', '?']
     new_words = []
-    words_low = words.lower() #Переводим строку в нижний регистр
-    for word in words_low.split():
-        for sign in signs:
+    for word in words.lower().split():
+        for sign in string.punctuation:
             word = word.replace(sign, "") #Удаляем из списка слов знаки препинания
         new_words.append(word)
     return new_words #Возвращает измененный список слов из строки
 
 
 #Функция определения самого длинного слова
-def most_long(words):
-    length = 0
+def most_long_word(words):
+    longest = ""
     for word in words:
-        if len(word) > length:
-            length = len(word)
+        if len(word) > len(longest):
             longest = word
     return longest
 
 
 #Функция подсчета гласных
-def count_glas(words):
-    glas = ['а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я']
-    glas_count = 0
+def vowel_counting(words):
+    vowel = ['а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я']
+    number_vowels = 0
     for word in words:
-        for symbol in glas:
-            glas_count += word.count(symbol)
-    return glas_count
+        for symbol in vowel:
+            number_vowels += word.count(symbol)
+    return number_vowels
 
 
 #Функция подсчета колчества вхождений
@@ -45,11 +45,11 @@ new_text = enter_text()
 #Вывод количества слов
 print(f"В данной строке {str(len(new_text))} слов")
 #Вывод самого длинного слова
-print("Самое длинное слово: " + (most_long(new_text)))
+print("Самое длинное слово: ",most_long_word(new_text))
 #Количество гласных
-print(f"Количество гласных {str(count_glas(new_text))}")
+print("Количество гласных ", vowel_counting(new_text))
 #Список с количеством вхождений
-print(count_word(new_text))
+print("Количество вхождений каждого слова ", count_word(new_text))
 
 
 
